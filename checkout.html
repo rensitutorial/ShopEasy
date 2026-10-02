@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy - Checkout</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: #2874f0;
+            color: white;
+            padding: 18px 6%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav h2 {
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .checkout-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px #ccc;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .summary {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f5f7fb;
+            border-radius: 8px;
+        }
+
+        .summary h3 {
+            margin-bottom: 12px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 15px 0;
+            color: #2874f0;
+            text-align: right;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2874f0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #1558c0;
+        }
+
+        .message {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .message p {
+            margin: 12px 0;
+        }
+
+        .message a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #2874f0;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                margin: 0 5px;
+            }
+
+            .checkout-container {
+                margin: 25px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <h2>ShopEasy</h2>
+
+            <div>
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="cart.html">Cart</a>
+                <a href="orders.html">My Orders</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Checkout Section -->
+    <div class="checkout-container" id="checkoutContainer">
+
+        <h2>Checkout</h2>
+
+        <!-- Order Summary -->
+        <div class="summary">
+            <h3>Order Summary</h3>
+
+            <div id="summaryItems"></div>
+
+            <div class="total" id="totalAmount">
+                Total: ₹0
+            </div>
+        </div>
+
+        <!-- Delivery Form -->
+        <form id="checkoutForm">
+
+            <h3>Delivery Details</h3>
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Full Name"
+                minlength="2"
+                required
+            >
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="10-digit Phone Number"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                required
+            >
+
+            <textarea
+                id="address"
+                placeholder="Delivery Address"
+                minlength="10"
+                required
+            ></textarea>
+
+            <label for="payment">
+                <strong>Payment Method</strong>
+            </label>
+
+            <select id="payment" required>
+                <option value="">Select Payment Method</option>
+                <option value="Cash on Delivery">
+                    Cash on Delivery
+                </option>
+                <option value="Demo Online Payment">
+                    Demo Online Payment
+                </option>
+            </select>
+
+            <button type="submit">
+                Place Order
+            </button>
+
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 ShopEasy. All rights reserved.</p>
+    </footer>
+
+    <script>
+
+        // Check login status
+        let loggedInUser =
+            localStorage.getItem("shopEasyLoggedIn");
+
+        if (!loggedInUser) {
+            alert("Please login before checkout.");
+            window.location.href = "login.html";
+        } else {
+
+            loggedInUser = JSON.parse(loggedInUser);
+
+            // Automatically fill the customer's name
+            document.getElementById("customerName").value =
+                loggedInUser.name || "";
+        }
+
+        // Get cart data
+        let cart =
+            JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Get HTML elements
+        const checkoutContainer =
+            document.getElementById("checkoutContainer");
+
+        const checkoutForm =
+            document.getElementById("checkoutForm");
+
+        const summaryItems =
+            document.getElementById("summaryItems");
+
+        const totalAmount =
+            document.getElementById("totalAmount");
+
+        let total = 0;
+
+        // Display order summary
+        function displaySummary() {
+
+            summaryItems.innerHTML = "";
+            total = 0;
+
+            cart.forEach(function(item) {
+
+                let price = Number(item.price);
+                let quantity = Number(item.quantity) || 1;
+                let itemTotal = price * quantity;
+
+                total += itemTotal;
+
+                let row = document.createElement("div");
+                row.className = "summary-item";
+
+                let name = document.createElement("span");
+                name.textContent =
+                    item.name + " × " + quantity;
+
+                let priceText = document.createElement("span");
+                priceText.textContent =
+                    "₹" + itemTotal.toFixed(2);
+
+                row.appendChild(name);
+                row.appendChild(priceText);
+
+                summaryItems.appendChild(row);
+            });
+
+            totalAmount.textContent =
+                "Total: ₹" + total.toFixed(2);
+        }
+
+        // Check whether cart is empty
+        if (cart.length === 0) {
+
+            checkoutContainer.innerHTML = `
+                <div class="message">
+                    <h2>Your cart is empty!</h2>
+
+                    <p>
+                        Please add products before checking out.
+                    </p>
+
+                    <a href="products.html">
+                        Continue Shopping
+                    </a>
+                </div>
+            `;
+
+        } else {
+
+            displaySummary();
+
+        }
+
+        // Place order
+        checkoutForm.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            // Check login again
+            if (!localStorage.getItem("shopEasyLoggedIn")) {
+                alert("Please login before placing an order.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            // Check cart
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            // Get customer details
+            const name =
+                document.getElementById("customerName").value.trim();
+
+            const phone =
+                document.getElementById("phone").value.trim();
+
+            const address =
+                document.getElementById("address").value.trim();
+
+            const payment =
+                document.getElementById("payment").value;
+
+            // Validate phone number
+            if (!/^[0-9]{10}$/.test(phone)) {
+                alert("Please enter a valid 10-digit phone number.");
+                return;
+            }
+
+            // Get existing orders
+            const orders =
+                JSON.parse(
+                    localStorage.getItem("shopEasyOrders")
+                ) || [];
+
+            // Create new order
+            const newOrder = {
+
+                id: Date.now(),
+
+                customerName: name,
+
+                phone: phone,
+
+                address: address,
+
+                payment: payment,
+
+                products: cart.map(function(item) {
+                    return {
+                        name: item.name,
+                        price: Number(item.price),
+                        quantity: Number(item.quantity) || 1
+                    };
+                }),
+
+                total: total,
+
+                date: new Date().toLocaleString(),
+
+                status: "Order Placed"
+            };
+
+            // Save order
+            orders.push(newOrder);
+
+            localStorage.setItem(
+                "shopEasyOrders",
+                JSON.stringify(orders)
+            );
+
+            // Clear cart
+            localStorage.removeItem("cart");
+
+            // Show confirmation
+            checkoutContainer.innerHTML = "";
+
+            const confirmation =
+                document.createElement("div");
+
+            confirmation.className = "message";
+
+            const heading =
+                document.createElement("h2");
+
+            heading.textContent =
+                "Order Placed Successfully!";
+
+            const thankYou =
+                document.createElement("p");
+
+            thankYou.textContent =
+                "Thank you, " + name + ".";
+
+            const orderId =
+                document.createElement("p");
+
+            orderId.textContent =
+                "Your Order ID: " + newOrder.id;
+
+            const amount =
+                document.createElement("p");
+
+            amount.textContent =
+                "Total Amount: ₹" + total.toFixed(2);
+
+            const paymentInfo =
+                document.createElement("p");
+
+            paymentInfo.textContent =
+                "Payment: " + payment;
+
+            const ordersLink =
+                document.createElement("a");
+
+            ordersLink.href = "orders.html";
+            ordersLink.textContent = "View My Orders";
+
+            const shoppingLink =
+                document.createElement("a");
+
+            shoppingLink.href = "products.html";
+            shoppingLink.textContent = "Continue Shopping";
+
+            confirmation.appendChild(heading);
+            confirmation.appendChild(thankYou);
+            confirmation.appendChild(orderId);
+            confirmation.appendChild(amount);
+            confirmation.appendChild(paymentInfo);
+            confirmation.appendChild(ordersLink);
+            confirmation.appendChild(
+                document.createElement("br")
+            );
+            confirmation.appendChild(shoppingLink);
+
+            checkoutContainer.appendChild(confirmation);
+
+        });
+
+    </script>
+
+</body>
+</html>
+

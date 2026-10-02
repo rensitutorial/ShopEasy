@@ -1,0 +1,438 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy - Product Details</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Product Details */
+        .product-details {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-details img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+        }
+
+        .quantity {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        .quantity button {
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        #addToCartBtn {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        /* Review Section */
+        .review-section {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-section h2,
+        .review-section h3 {
+            text-align: center;
+        }
+
+        #reviewForm {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #reviewForm input,
+        #reviewForm select,
+        #reviewForm textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        #reviewForm textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        #reviewForm button {
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .review-card {
+            padding: 12px;
+            margin-top: 12px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .review-card h4 {
+            margin: 0 0 8px;
+        }
+
+        .review-card p {
+            margin: 6px 0;
+        }
+
+        /* Navigation Buttons */
+        .details-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px;
+            flex-wrap: wrap;
+        }
+
+        .details-navigation button {
+            padding: 10px 18px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .details-navigation button:hover,
+        #reviewForm button:hover {
+            background: #4b5fc4;
+        }
+
+        @media (max-width: 600px) {
+            .product-details,
+            .review-section {
+                margin: 20px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <h1 class="logo">🛒 ShopEasy</h1>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart 🛒</a></li>
+                <li><a href="wishlist.html">Wishlist ❤️</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1 style="text-align: center;">Product Details</h1>
+
+    <!-- Product Details -->
+    <div class="product-details" id="productDetails">
+        <img id="productImage" src="" alt="Product Image">
+
+        <h2 id="productName"></h2>
+        <p id="productDescription"></p>
+        <h3 id="productPrice"></h3>
+
+        <div class="quantity">
+            <button id="decreaseBtn" type="button">−</button>
+            <span id="quantity">1</span>
+            <button id="increaseBtn" type="button">+</button>
+        </div>
+
+        <button id="addToCartBtn" type="button">
+            Add to Cart
+        </button>
+    </div>
+
+    <!-- Customer Reviews -->
+    <div class="review-section">
+        <h2>Customer Reviews</h2>
+
+        <form id="reviewForm">
+            <label for="reviewName">Your Name:</label>
+            <input
+                type="text"
+                id="reviewName"
+                placeholder="Enter your name"
+                required
+            >
+
+            <label for="rating">Rating:</label>
+            <select id="rating" required>
+                <option value="">Select Rating</option>
+                <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                <option value="4">⭐⭐⭐⭐ - Very Good</option>
+                <option value="3">⭐⭐⭐ - Good</option>
+                <option value="2">⭐⭐ - Average</option>
+                <option value="1">⭐ - Poor</option>
+            </select>
+
+            <label for="reviewText">Your Review:</label>
+            <textarea
+                id="reviewText"
+                placeholder="Write your review"
+                required
+            ></textarea>
+
+            <button type="submit">Submit Review</button>
+        </form>
+
+        <h3>Reviews</h3>
+        <div id="reviewsList"></div>
+    </div>
+
+    <!-- Navigation -->
+    <p style="text-align: center;">
+        <a href="products.html">Back to Products</a>
+    </p>
+
+    <div class="details-navigation">
+        <button
+            type="button"
+            onclick="window.location.href='products.html'"
+        >
+            Continue Shopping
+        </button>
+
+        <button
+            type="button"
+            onclick="window.location.href='cart.html'"
+        >
+            View Cart
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p style="text-align: center;">
+            © 2026 ShopEasy. All Rights Reserved.
+        </p>
+    </footer>
+
+    <script>
+        // Product Information
+        const products = [
+            {
+                name: "Wireless Headphones",
+                price: 999,
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+                description: "High-quality wireless headphones with clear sound."
+            },
+            {
+                name: "Casual T-Shirt",
+                price: 599,
+                image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
+                description: "Comfortable cotton T-shirt."
+            },
+            {
+                name: "Running Shoes",
+                price: 1499,
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+                description: "Comfortable sports shoes."
+            },
+            {
+                name: "Smart Watch",
+                price: 2499,
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
+                description: "Modern smartwatch with useful features."
+            },
+            {
+                name: "Leather Bag",
+                price: 1299,
+                image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa",
+                description: "Stylish and durable everyday bag."
+            },
+            {
+                name: "Stylish Sunglasses",
+                price: 799,
+                image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083",
+                description: "Trendy sunglasses for everyday use."
+            }
+        ];
+
+        // Get Product Name from URL
+        const params = new URLSearchParams(window.location.search);
+        const productName = params.get("name");
+
+        // Find Selected Product
+        const product = products.find(
+            item => item.name === productName
+        );
+
+        let quantity = 1;
+
+        // Display Product Details
+        if (product) {
+            document.getElementById("productImage").src = product.image;
+            document.getElementById("productName").textContent = product.name;
+            document.getElementById("productDescription").textContent =
+                product.description;
+            document.getElementById("productPrice").textContent =
+                "₹" + product.price;
+
+            // Increase Quantity
+            document.getElementById("increaseBtn").onclick = function () {
+                quantity++;
+                document.getElementById("quantity").textContent = quantity;
+            };
+
+            // Decrease Quantity
+            document.getElementById("decreaseBtn").onclick = function () {
+                if (quantity > 1) {
+                    quantity--;
+                    document.getElementById("quantity").textContent = quantity;
+                }
+            };
+
+            // Add Product to Cart
+            document.getElementById("addToCartBtn").onclick = function () {
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+                const existingItem = cart.find(
+                    item => item.name === product.name
+                );
+
+                if (existingItem) {
+                    existingItem.quantity =
+                        (existingItem.quantity || 1) + quantity;
+                } else {
+                    cart.push({
+                        name: product.name,
+                        price: product.price,
+                        quantity: quantity
+                    });
+                }
+
+                localStorage.setItem("cart", JSON.stringify(cart));
+
+                alert(quantity + " item(s) added to cart!");
+            };
+        } else {
+            document.getElementById("productDetails").innerHTML =
+                "<h2>Product not found</h2>" +
+                "<p>Please return to the products page.</p>";
+        }
+
+        // Get Reviews for the Current Product
+        function getReviews() {
+            let allReviews =
+                JSON.parse(localStorage.getItem("reviews")) || [];
+
+            return allReviews.filter(
+                review => review.productName === productName
+            );
+        }
+
+        // Display Reviews
+        function displayReviews() {
+            const reviewsList = document.getElementById("reviewsList");
+            const reviews = getReviews();
+
+            reviewsList.innerHTML = "";
+
+            if (reviews.length === 0) {
+                reviewsList.innerHTML = "<p>No reviews yet.</p>";
+                return;
+            }
+
+            reviews.forEach(review => {
+                const card = document.createElement("div");
+                card.className = "review-card";
+
+                const name = document.createElement("h4");
+                name.textContent = review.name;
+
+                const stars = document.createElement("p");
+                stars.textContent = "⭐".repeat(review.rating);
+
+                const comment = document.createElement("p");
+                comment.textContent = review.comment;
+
+                card.append(name, stars, comment);
+                reviewsList.appendChild(card);
+            });
+        }
+
+        // Submit a Review
+        document.getElementById("reviewForm").addEventListener(
+            "submit",
+            function (event) {
+                event.preventDefault();
+
+                if (!product) {
+                    alert("Product not found.");
+                    return;
+                }
+
+                const name =
+                    document.getElementById("reviewName").value.trim();
+
+                const rating =
+                    Number(document.getElementById("rating").value);
+
+                const comment =
+                    document.getElementById("reviewText").value.trim();
+
+                if (!name || !rating || !comment) {
+                    alert("Please fill in all fields.");
+                    return;
+                }
+
+                let allReviews =
+                    JSON.parse(localStorage.getItem("reviews")) || [];
+
+                allReviews.push({
+                    productName: product.name,
+                    name: name,
+                    rating: rating,
+                    comment: comment
+                });
+
+                localStorage.setItem(
+                    "reviews",
+                    JSON.stringify(allReviews)
+                );
+
+                document.getElementById("reviewForm").reset();
+
+                displayReviews();
+
+                alert("Review submitted successfully!");
+            }
+        );
+
+        // Show Saved Reviews on Page Load
+        displayReviews();
+    </script>
+
+</body>
+</html>

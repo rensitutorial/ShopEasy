@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy - Registration</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation Bar */
+        header {
+            background: #2874f0;
+            color: white;
+            padding: 18px 6%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav h2 {
+            color: white;
+            font-size: 26px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Registration Section */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 15px;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .register-icon {
+            text-align: center;
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .register-container h2 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .register-container label {
+            display: block;
+            margin-bottom: 7px;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .register-container input {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .register-container input:focus {
+            outline: none;
+            border-color: #2874f0;
+            box-shadow: 0 0 4px rgba(40, 116, 240, 0.3);
+        }
+
+        .register-container button {
+            width: 100%;
+            padding: 13px;
+            background: #2874f0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .register-container button:hover {
+            background: #1558c0;
+        }
+
+        .register-container p {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .register-container a {
+            color: #2874f0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register-container a:hover {
+            text-decoration: underline;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #d32f2f;
+        }
+
+        .success {
+            color: #16803c;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        /* Mobile Design */
+        @media (max-width: 500px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                margin: 0 7px;
+            }
+
+            .register-container {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <h2>🛒 ShopEasy</h2>
+
+            <div>
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="cart.html">Cart</a>
+                <a href="login.html">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Registration Section -->
+    <main class="main-content">
+        <div class="register-container">
+
+            <div class="register-icon">👤</div>
+
+            <h2>Create Account</h2>
+
+            <p class="subtitle">
+                Join ShopEasy and start shopping.
+            </p>
+
+            <form id="registerForm">
+
+                <label for="name">Full Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    minlength="2"
+                    required
+                >
+
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create password (minimum 6 characters)"
+                    minlength="6"
+                    required
+                >
+
+                <label for="confirmPassword">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                    minlength="6"
+                    required
+                >
+
+                <button type="submit">Register</button>
+
+                <div id="message" class="message"></div>
+
+            </form>
+
+            <p>
+                Already have an account?
+                <a href="login.html">Login here</a>
+            </p>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 ShopEasy. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const registerForm = document.getElementById("registerForm");
+        const message = document.getElementById("message");
+
+        registerForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name")
+                .value.trim();
+
+            const email = document.getElementById("email")
+                .value.trim().toLowerCase();
+
+            const password = document.getElementById("password")
+                .value;
+
+            const confirmPassword = document.getElementById("confirmPassword")
+                .value;
+
+            // Check name
+            if (name.length < 2) {
+                showMessage(
+                    "Please enter a valid name.",
+                    "error"
+                );
+                return;
+            }
+
+            // Check password length
+            if (password.length < 6) {
+                showMessage(
+                    "Password must contain at least 6 characters.",
+                    "error"
+                );
+                return;
+            }
+
+            // Check password match
+            if (password !== confirmPassword) {
+                showMessage(
+                    "Passwords do not match!",
+                    "error"
+                );
+                return;
+            }
+
+            // Get existing registered user
+            let existingUser = null;
+
+            try {
+                existingUser = JSON.parse(
+                    localStorage.getItem("shopEasyUser")
+                );
+            } catch (error) {
+                existingUser = null;
+            }
+
+            // Check duplicate email
+            if (
+                existingUser &&
+                existingUser.email &&
+                existingUser.email.toLowerCase() === email
+            ) {
+                showMessage(
+                    "This email is already registered. Please login.",
+                    "error"
+                );
+                return;
+            }
+
+            // Create new user
+            const user = {
+                name: name,
+                email: email,
+                password: password
+            };
+
+            // Save user details
+            localStorage.setItem(
+                "shopEasyUser",
+                JSON.stringify(user)
+            );
+
+            showMessage(
+                "Registration successful! Redirecting to login...",
+                "success"
+            );
+
+            registerForm.reset();
+
+            // Redirect to login page
+            setTimeout(function() {
+                window.location.href = "login.html";
+            }, 1500);
+        });
+
+        // Display messages
+        function showMessage(text, type) {
+            message.textContent = text;
+            message.className = "message " + type;
+        }
+    </script>
+
+</body>
+</html>

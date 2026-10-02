@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy - Home</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* Navigation Bar */
+        header {
+            background: #ffffff;
+            padding: 18px 6%;
+            box-shadow: 0 2px 10px #ddd;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 27px;
+            color: #2874f0;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #2874f0;
+        }
+
+        #userInfo {
+            color: #2874f0;
+            font-weight: bold;
+        }
+
+        #logoutBtn {
+            display: none;
+            padding: 9px 15px;
+            background: #2874f0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #logoutBtn:hover {
+            background: #1558c0;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 380px;
+            padding: 70px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(120deg, #dbeafe, #eff6ff);
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            color: #174ea6;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            background: #ff9800;
+            color: white;
+            padding: 13px 28px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .shop-btn:hover {
+            background: #e68900;
+            transform: translateY(-2px);
+        }
+
+        /* Featured Products */
+        .products {
+            padding: 55px 6%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .section-description {
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .product-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            width: 260px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #ddd;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 8px 20px #ccc;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .product-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #2874f0;
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            background: #2874f0;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .view-btn:hover {
+            background: #1558c0;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background: white;
+            padding: 40px 6%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 35px;
+            text-align: center;
+        }
+
+        .benefit {
+            width: 220px;
+        }
+
+        .benefit h3 {
+            color: #2874f0;
+            margin: 10px 0;
+        }
+
+        .benefit p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .benefit-icon {
+            font-size: 35px;
+        }
+
+        /* Footer */
+        footer {
+            background: #202b3c;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 650px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .hero {
+                padding: 55px 20px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 25px;
+            }
+
+            .product-card {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <h2 class="logo">🛒 ShopEasy</h2>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="cart.html">Cart 🛒</a>
+                <a href="wishlist.html">Wishlist ❤️</a>
+
+                <a href="login.html" id="loginLink">Login</a>
+
+                <span id="userInfo"></span>
+
+                <button id="logoutBtn" onclick="logoutUser()">
+                    Logout
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to ShopEasy</h1>
+
+            <p>
+                Discover amazing products at great prices.
+                Shop your favorites and enjoy a wonderful
+                shopping experience.
+            </p>
+
+            <a href="products.html" class="shop-btn">
+                Shop Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products">
+        <h2 class="section-title">Featured Products</h2>
+
+        <p class="section-description">
+            Explore some of our popular products.
+        </p>
+
+        <div class="product-container">
+
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img
+                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
+                    alt="Headphones">
+
+                <h3>Headphones</h3>
+                <p class="price">₹999</p>
+
+                <a href="products.html" class="view-btn">
+                    View Products
+                </a>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img
+                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400"
+                    alt="Smartwatch">
+
+                <h3>Smartwatch</h3>
+                <p class="price">₹1,499</p>
+
+                <a href="products.html" class="view-btn">
+                    View Products
+                </a>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img
+                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400"
+                    alt="Shoes">
+
+                <h3>Shoes</h3>
+                <p class="price">₹1,999</p>
+
+                <a href="products.html" class="view-btn">
+                    View Products
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Shopping Benefits -->
+    <section class="benefits">
+
+        <div class="benefit">
+            <div class="benefit-icon">🚚</div>
+            <h3>Fast Delivery</h3>
+            <p>Get your favorite products delivered to your doorstep.</p>
+        </div>
+
+        <div class="benefit">
+            <div class="benefit-icon">💳</div>
+            <h3>Secure Payment</h3>
+            <p>Enjoy a simple and convenient checkout experience.</p>
+        </div>
+
+        <div class="benefit">
+            <div class="benefit-icon">⭐</div>
+            <h3>Quality Products</h3>
+            <p>Explore a variety of products for your daily needs.</p>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 ShopEasy. All rights reserved.</p>
+        <p>Happy Shopping!</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+
+        // Check whether the user is logged in
+        let user = localStorage.getItem("shopEasyLoggedIn");
+
+        if (user) {
+            user = JSON.parse(user);
+
+            // Display user's name
+            document.getElementById("userInfo").textContent =
+                "Welcome, " + user.name;
+
+            // Hide Login link
+            document.getElementById("loginLink").style.display =
+                "none";
+
+            // Show Logout button
+            document.getElementById("logoutBtn").style.display =
+                "inline-block";
+        }
+
+        // Logout function
+        function logoutUser() {
+            localStorage.removeItem("shopEasyLoggedIn");
+
+            alert("You have logged out successfully!");
+
+            window.location.href = "index.html";
+        }
+
+    </script>
+
+</body>
+</html>
